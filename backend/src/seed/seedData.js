@@ -1,5 +1,9 @@
-const dns = require('dns');
-dns.setServers(['8.8.8.8', '8.8.4.4']);
+if (process.platform === 'win32' && process.env.NODE_ENV !== 'production') {
+  try {
+    const dns = require('dns');
+    dns.setServers(['8.8.8.8', '8.8.4.4']);
+  } catch (err) {}
+}
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Room = require('../models/Room');

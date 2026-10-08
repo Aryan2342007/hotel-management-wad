@@ -17,7 +17,7 @@ exports.getDashboardStats = async (req, res) => {
       },
     ]);
 
-    const totalRooms = roomStats.total[0] ? roomStats.total[0].count : 0;
+    const totalRooms = roomStats?.total?.[0]?.count || 0;
     const statusMap = {
       Available: 0,
       Occupied: 0,
@@ -25,7 +25,7 @@ exports.getDashboardStats = async (req, res) => {
       Maintenance: 0,
     };
 
-    roomStats.byStatus.forEach((item) => {
+    (roomStats?.byStatus || []).forEach((item) => {
       if (statusMap[item._id] !== undefined) {
         statusMap[item._id] = item.count;
       }

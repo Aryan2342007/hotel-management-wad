@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const mongoose = require('mongoose');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 // Load environment variables
@@ -24,10 +25,14 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
+  const dbStates = ['Disconnected', 'Connected', 'Connecting', 'Disconnecting'];
+  const stateCode = mongoose.connection.readyState;
   res.json({
     status: 'OK',
     project: 'Hotel Management System (ADBMS)',
     developer: 'Aryan Patel',
+    databaseStatus: dbStates[stateCode] || 'Unknown',
+    hasMongoUriEnv: Boolean(process.env.MONGODB_URI),
     timestamp: new Date().toISOString(),
   });
 });
@@ -62,7 +67,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
   console.log(`🏨 Hotel Management System Server Running on Port ${PORT}`);
   console.log(`📊 Mode: ${process.env.NODE_ENV || 'development'}`);
