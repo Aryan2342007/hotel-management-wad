@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "c1f7a220-4180-4581-9b27-hotel-mgmt-adbms",
+    "name": "Hotel Management System (ADBMS) API Collection",
+    "description": "Comprehensive Postman API collection for Hotel Management System ADBMS project covering all 8 modules and Aggregation Pipelines.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Module 1 - Guests",
+      "item": [
+        {
+          "name": "Get All Guests",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/guests"
+          }
+        },
+        {
+          "name": "Create Guest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Rohit\",\n  \"lastName\": \"Sharma\",\n  \"email\": \"rohit.sharma@example.com\",\n  \"phone\": \"+91 9888877777\",\n  \"address\": {\"city\": \"Mumbai\", \"state\": \"Maharashtra\"},\n  \"idProof\": {\"type\": \"Passport\", \"idNumber\": \"P9988776\"}\n}"
+            },
+            "url": "http://localhost:5000/api/guests"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 2 - Rooms",
+      "item": [
+        {
+          "name": "Get All Rooms",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/rooms"
+          }
+        },
+        {
+          "name": "Get Available Rooms (by Date)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/rooms/available?checkInDate=2026-10-10&checkOutDate=2026-10-12"
+          }
+        },
+        {
+          "name": "Create Room",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"501\",\n  \"roomType\": \"Suite\",\n  \"pricePerNight\": 8500,\n  \"floor\": 5,\n  \"capacity\": 4,\n  \"amenities\": [\"Wi-Fi\", \"AC\", \"Jacuzzi\", \"Balcony\"]\n}"
+            },
+            "url": "http://localhost:5000/api/rooms"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 3 - Reservations",
+      "item": [
+        {
+          "name": "Get All Reservations",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/reservations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 4 & 5 - Check-In & Check-Out",
+      "item": [
+        {
+          "name": "Get Front Desk Summary",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/checkinout/desk"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 6 - Payments",
+      "item": [
+        {
+          "name": "Get All Invoices & Payments",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/payments"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 7 - Staff",
+      "item": [
+        {
+          "name": "Get All Staff",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/staff"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Module 8 - Dashboard & ADBMS Aggregation",
+      "item": [
+        {
+          "name": "Dashboard KPI Stats",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/dashboard/stats"
+          }
+        },
+        {
+          "name": "Room Analytics ($group, $avg)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/dashboard/room-analytics"
+          }
+        },
+        {
+          "name": "Revenue Trends ($project, $dateToString, $group)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/dashboard/revenue-trends"
+          }
+        },
+        {
+          "name": "ADBMS Live Aggregation Pipelines",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:5000/api/dashboard/adbms-lab"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "grand-stay-hotel-management",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Grand Stay Hotel Management System (ADBMS)",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "build": "npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "node backend/src/server.js",
+    "seed": "node backend/src/seed/seedData.js"
+  },
+  "keywords": [
+    "hotel-management",
+    "adbms",
+    "mongodb",
+    "express",
+    "react",
+    "vite"
+  ],
+  "author": "Aryan Patel",
+  "license": "ISC"
+}
