@@ -122,21 +122,21 @@ export default function GuestsView() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-xs">
         <div>
           <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-bold text-white">Guest Management</h2>
-            <span className="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono">
+            <h2 className="text-xl font-bold text-slate-900">Guest Management</h2>
+            <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full font-mono">
               Module 1
             </span>
           </div>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Register guests, manage identity proofs, search records, and view booking history.
           </p>
         </div>
         <button
           onClick={handleOpenAdd}
-          className="flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold text-sm transition shadow-md shadow-amber-500/20"
+          className="flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm transition shadow-xs"
         >
           <Plus className="w-4 h-4" />
           <span>Register Guest</span>
@@ -144,14 +144,14 @@ export default function GuestsView() {
       </div>
 
       {actionMessage && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 px-4 py-3 rounded-xl flex items-center space-x-2 text-sm">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl flex items-center space-x-2 text-sm">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>{actionMessage}</span>
         </div>
       )}
 
       {/* Search Bar */}
-      <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+      <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
         <div className="relative w-full md:w-96">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
@@ -159,24 +159,24 @@ export default function GuestsView() {
             placeholder="Search by name, email, phone, ID number..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
           />
         </div>
       </div>
 
       {/* Guests Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
         {loading ? (
           <div className="text-center py-16 text-slate-500">Loading guests...</div>
         ) : guests.length === 0 ? (
           <div className="text-center py-16">
-            <Users className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-400">No guests found</p>
+            <Users className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+            <p className="text-slate-500">No guests found</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-300">
-              <thead className="text-xs uppercase bg-slate-950 text-slate-400 border-b border-slate-800">
+            <table className="w-full text-left text-sm text-slate-700">
+              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Guest</th>
                   <th className="py-3.5 px-4">Contact Info</th>
@@ -186,60 +186,60 @@ export default function GuestsView() {
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {guests.map((g) => (
-                  <tr key={g._id} className="hover:bg-slate-850/50 transition">
+                  <tr key={g._id} className="hover:bg-slate-50/80 transition">
                     <td className="py-3.5 px-4">
-                      <div className="font-semibold text-white">
+                      <div className="font-semibold text-slate-900">
                         {g.firstName} {g.lastName}
                       </div>
-                      <span className="text-[11px] text-slate-500 font-mono">
+                      <span className="text-[11px] text-slate-400 font-mono">
                         ID: {g._id.slice(-6)}
                       </span>
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="flex items-center space-x-1.5 text-xs text-slate-300">
-                        <Mail className="w-3.5 h-3.5 text-slate-500" />
+                      <div className="flex items-center space-x-1.5 text-xs text-slate-600">
+                        <Mail className="w-3.5 h-3.5 text-slate-400" />
                         <span>{g.email}</span>
                       </div>
-                      <div className="flex items-center space-x-1.5 text-xs text-slate-400 mt-0.5">
-                        <Phone className="w-3.5 h-3.5 text-slate-500" />
+                      <div className="flex items-center space-x-1.5 text-xs text-slate-500 mt-0.5">
+                        <Phone className="w-3.5 h-3.5 text-slate-400" />
                         <span>{g.phone}</span>
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-amber-400 border border-slate-700">
+                      <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                         {g.idProof?.type}
                       </span>
-                      <span className="text-xs text-slate-400 block font-mono mt-1">
+                      <span className="text-xs text-slate-500 block font-mono mt-1">
                         {g.idProof?.idNumber}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 text-xs text-slate-400">
+                    <td className="py-3.5 px-4 text-xs text-slate-600">
                       {g.address?.city ? `${g.address.city}, ${g.address.state || g.address.country}` : 'Not provided'}
                     </td>
-                    <td className="py-3.5 px-4 text-xs text-slate-400 max-w-xs truncate">
+                    <td className="py-3.5 px-4 text-xs text-slate-500 max-w-xs truncate">
                       {g.specialRequests || '—'}
                     </td>
                     <td className="py-3.5 px-4 text-right space-x-2">
                       <button
                         onClick={() => handleViewHistory(g._id)}
                         title="View Booking History"
-                        className="p-1.5 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition"
+                        className="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition"
                       >
                         <History className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleOpenEdit(g)}
                         title="Edit Guest"
-                        className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition"
+                        className="p-1.5 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 transition"
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(g._id, `${g.firstName} ${g.lastName}`)}
                         title="Delete Guest"
-                        className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 transition"
+                        className="p-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 transition"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -254,65 +254,65 @@ export default function GuestsView() {
 
       {/* Add / Edit Guest Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-1">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">
               {editingGuest ? 'Edit Guest Profile' : 'Register New Guest'}
             </h3>
-            <p className="text-xs text-slate-400 mb-4">
+            <p className="text-xs text-slate-500 mb-4">
               Enter identification details and contact info for the guest
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">First Name *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">First Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Last Name *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Last Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Email *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Email *</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Phone *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Phone *</label>
                   <input
                     type="text"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">ID Proof Type *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">ID Proof Type *</label>
                   <select
                     value={formData.idProof.type}
                     onChange={(e) =>
@@ -321,7 +321,7 @@ export default function GuestsView() {
                         idProof: { ...formData.idProof, type: e.target.value },
                       })
                     }
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   >
                     {idProofTypes.map((t) => (
                       <option key={t} value={t}>{t}</option>
@@ -329,7 +329,7 @@ export default function GuestsView() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">ID Number *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">ID Number *</label>
                   <input
                     type="text"
                     required
@@ -341,14 +341,14 @@ export default function GuestsView() {
                         idProof: { ...formData.idProof, idNumber: e.target.value },
                       })
                     }
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">City</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">City</label>
                   <input
                     type="text"
                     value={formData.address.city}
@@ -358,11 +358,11 @@ export default function GuestsView() {
                         address: { ...formData.address, city: e.target.value },
                       })
                     }
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">State / Country</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">State / Country</label>
                   <input
                     type="text"
                     value={formData.address.state}
@@ -372,33 +372,33 @@ export default function GuestsView() {
                         address: { ...formData.address, state: e.target.value },
                       })
                     }
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 font-medium block mb-1">Special Preferences / Requests</label>
+                <label className="text-xs text-slate-600 font-medium block mb-1">Special Preferences / Requests</label>
                 <input
                   type="text"
                   placeholder="e.g. Non-smoking room, extra towels"
                   value={formData.specialRequests}
                   onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-sm transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm transition shadow-xs"
                 >
                   {editingGuest ? 'Update Guest' : 'Save Guest'}
                 </button>
@@ -410,61 +410,61 @@ export default function GuestsView() {
 
       {/* Guest History Modal */}
       {selectedGuestHistory && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
-            <div className="flex items-start justify-between border-b border-slate-800 pb-4 mb-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto text-slate-800">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4 mb-4">
               <div>
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-lg font-bold text-slate-900">
                   {selectedGuestHistory.data.firstName} {selectedGuestHistory.data.lastName}
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   {selectedGuestHistory.data.email} • {selectedGuestHistory.data.phone}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedGuestHistory(null)}
-                className="text-slate-400 hover:text-white text-sm"
+                className="text-slate-400 hover:text-slate-700 text-sm font-semibold"
               >
                 ✕ Close
               </button>
             </div>
 
-            <h4 className="text-xs font-semibold uppercase text-amber-400 tracking-wider mb-3">
+            <h4 className="text-xs font-semibold uppercase text-amber-700 tracking-wider mb-3">
               Booking History ({selectedGuestHistory.reservations?.length || 0})
             </h4>
 
             {selectedGuestHistory.reservations?.length === 0 ? (
-              <p className="text-sm text-slate-500 py-4 text-center">No reservations found for this guest.</p>
+              <p className="text-sm text-slate-400 py-4 text-center">No reservations found for this guest.</p>
             ) : (
               <div className="space-y-3">
                 {selectedGuestHistory.reservations?.map((res) => (
                   <div
                     key={res._id}
-                    className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between"
+                    className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between"
                   >
                     <div>
-                      <span className="font-mono text-xs font-bold text-amber-400">{res.bookingNumber}</span>
-                      <p className="text-sm font-semibold text-white mt-0.5">
+                      <span className="font-mono text-xs font-bold text-amber-600">{res.bookingNumber}</span>
+                      <p className="text-sm font-semibold text-slate-900 mt-0.5">
                         Room {res.room?.roomNumber} ({res.room?.roomType})
                       </p>
-                      <p className="text-xs text-slate-400 mt-0.5">
+                      <p className="text-xs text-slate-500 mt-0.5">
                         {new Date(res.checkInDate).toLocaleDateString()} &rarr;{' '}
                         {new Date(res.checkOutDate).toLocaleDateString()} ({res.totalNights} nights)
                       </p>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm font-bold text-emerald-400 block">
+                      <span className="text-sm font-bold text-emerald-600 block">
                         ₹{res.totalAmount?.toLocaleString('en-IN')}
                       </span>
                       <span
                         className={`text-[10px] font-semibold px-2 py-0.5 rounded-full inline-block mt-1 ${
                           res.status === 'CheckedIn'
-                            ? 'bg-amber-500/10 text-amber-400'
+                            ? 'bg-amber-50 text-amber-800 border border-amber-200'
                             : res.status === 'Confirmed'
-                            ? 'bg-blue-500/10 text-blue-400'
+                            ? 'bg-blue-50 text-blue-700 border border-blue-200'
                             : res.status === 'CheckedOut'
-                            ? 'bg-emerald-500/10 text-emerald-400'
-                            : 'bg-rose-500/10 text-rose-400'
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-rose-50 text-rose-700 border border-rose-200'
                         }`}
                       >
                         {res.status}

@@ -146,36 +146,36 @@ export default function ReservationsView({ onNavigateToDesk }) {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'Confirmed':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+        return 'bg-blue-50 text-blue-700 border-blue-200';
       case 'CheckedIn':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        return 'bg-amber-50 text-amber-800 border-amber-200';
       case 'CheckedOut':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
       case 'Cancelled':
-        return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
+        return 'bg-rose-50 text-rose-700 border-rose-200';
       default:
-        return 'bg-slate-700 text-slate-300 border-slate-600';
+        return 'bg-slate-100 text-slate-700 border-slate-200';
     }
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200 p-6 rounded-2xl shadow-xs">
         <div>
           <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-bold text-white">Reservation Management</h2>
-            <span className="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full font-mono">
+            <h2 className="text-xl font-bold text-slate-900">Reservation Management</h2>
+            <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full font-mono">
               Module 3
             </span>
           </div>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Book rooms, prevent collision overlaps, manage active dates, and handle cancellations.
           </p>
         </div>
         <button
           onClick={handleOpenAddModal}
-          className="flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold text-sm transition shadow-md shadow-amber-500/20"
+          className="flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm transition shadow-xs"
         >
           <Plus className="w-4 h-4" />
           <span>New Reservation</span>
@@ -183,14 +183,14 @@ export default function ReservationsView({ onNavigateToDesk }) {
       </div>
 
       {actionMessage && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 px-4 py-3 rounded-xl flex items-center space-x-2 text-sm">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl flex items-center space-x-2 text-sm">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>{actionMessage}</span>
         </div>
       )}
 
       {/* Filters Bar */}
-      <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col md:flex-row gap-3 items-center justify-between shadow-xs">
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
@@ -198,7 +198,7 @@ export default function ReservationsView({ onNavigateToDesk }) {
             placeholder="Search booking number..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
           />
         </div>
 
@@ -206,7 +206,7 @@ export default function ReservationsView({ onNavigateToDesk }) {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-slate-300 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
+            className="bg-white border border-slate-200 text-slate-700 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500"
           >
             <option value="">All Reservation Statuses</option>
             {reservationStatuses.map((st) => (
@@ -220,7 +220,7 @@ export default function ReservationsView({ onNavigateToDesk }) {
                 setStatusFilter('');
                 setSearch('');
               }}
-              className="text-xs text-amber-400 hover:text-amber-300 px-2 py-1"
+              className="text-xs text-amber-600 hover:text-amber-700 px-2 py-1 font-medium"
             >
               Reset
             </button>
@@ -229,18 +229,18 @@ export default function ReservationsView({ onNavigateToDesk }) {
       </div>
 
       {/* Reservations Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
         {loading ? (
           <div className="text-center py-16 text-slate-500">Loading reservations...</div>
         ) : reservations.length === 0 ? (
           <div className="text-center py-16">
-            <CalendarCheck className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-400">No reservations found</p>
+            <CalendarCheck className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+            <p className="text-slate-500">No reservations found</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-300">
-              <thead className="text-xs uppercase bg-slate-950 text-slate-400 border-b border-slate-800">
+            <table className="w-full text-left text-sm text-slate-700">
+              <thead className="text-xs uppercase bg-slate-50 text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="py-3.5 px-4">Booking #</th>
                   <th className="py-3.5 px-4">Guest Name</th>
@@ -251,31 +251,31 @@ export default function ReservationsView({ onNavigateToDesk }) {
                   <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {reservations.map((res) => (
-                  <tr key={res._id} className="hover:bg-slate-850/50 transition">
-                    <td className="py-3.5 px-4 font-mono font-semibold text-amber-400">
+                  <tr key={res._id} className="hover:bg-slate-50/80 transition">
+                    <td className="py-3.5 px-4 font-mono font-semibold text-amber-600">
                       {res.bookingNumber}
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="font-semibold text-white">
+                      <div className="font-semibold text-slate-900">
                         {res.guest?.firstName} {res.guest?.lastName}
                       </div>
-                      <span className="text-xs text-slate-400">{res.guest?.phone}</span>
+                      <span className="text-xs text-slate-500">{res.guest?.phone}</span>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="font-semibold text-slate-200">Room {res.room?.roomNumber}</span>
-                      <span className="text-xs text-slate-400 block">{res.room?.roomType}</span>
+                      <span className="font-semibold text-slate-800">Room {res.room?.roomNumber}</span>
+                      <span className="text-xs text-slate-500 block">{res.room?.roomType}</span>
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="text-xs text-slate-300">
+                      <div className="text-xs text-slate-600">
                         {new Date(res.checkInDate).toLocaleDateString()} &rarr; {new Date(res.checkOutDate).toLocaleDateString()}
                       </div>
-                      <span className="text-[11px] text-slate-500 font-mono mt-0.5 block">
+                      <span className="text-[11px] text-slate-400 font-mono mt-0.5 block">
                         {res.totalNights} Night{res.totalNights > 1 ? 's' : ''} ({res.numberOfGuests} guests)
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 font-bold text-emerald-400">
+                    <td className="py-3.5 px-4 font-bold text-emerald-600">
                       ₹{res.totalAmount?.toLocaleString('en-IN')}
                     </td>
                     <td className="py-3.5 px-4">
@@ -292,7 +292,7 @@ export default function ReservationsView({ onNavigateToDesk }) {
                         <>
                           <button
                             onClick={() => handleQuickCheckIn(res._id)}
-                            className="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 text-xs font-semibold transition"
+                            className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200 transition"
                           >
                             Check In
                           </button>
@@ -301,7 +301,7 @@ export default function ReservationsView({ onNavigateToDesk }) {
                               setCancelModalRes(res);
                               setCancellationReason('');
                             }}
-                            className="p-1 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 transition"
+                            className="p-1 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 transition"
                             title="Cancel Booking"
                           >
                             <XCircle className="w-4 h-4" />
@@ -319,21 +319,21 @@ export default function ReservationsView({ onNavigateToDesk }) {
 
       {/* New Reservation Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-1">Create New Reservation</h3>
-            <p className="text-xs text-slate-400 mb-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Create New Reservation</h3>
+            <p className="text-xs text-slate-500 mb-4">
               Select guest, choose room, and set dates. Overlap collision will be checked automatically.
             </p>
 
             <form onSubmit={handleCreateReservation} className="space-y-4">
               <div>
-                <label className="text-xs text-slate-400 font-medium block mb-1">Select Guest *</label>
+                <label className="text-xs text-slate-600 font-medium block mb-1">Select Guest *</label>
                 <select
                   required
                   value={formData.guestId}
                   onChange={(e) => setFormData({ ...formData, guestId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                 >
                   {allGuests.map((g) => (
                     <option key={g._id} value={g._id}>
@@ -344,12 +344,12 @@ export default function ReservationsView({ onNavigateToDesk }) {
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 font-medium block mb-1">Select Room *</label>
+                <label className="text-xs text-slate-600 font-medium block mb-1">Select Room *</label>
                 <select
                   required
                   value={formData.roomId}
                   onChange={(e) => setFormData({ ...formData, roomId: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                 >
                   {allRooms.map((r) => (
                     <option key={r._id} value={r._id}>
@@ -361,30 +361,30 @@ export default function ReservationsView({ onNavigateToDesk }) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Check-In Date *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Check-In Date *</label>
                   <input
                     type="date"
                     required
                     value={formData.checkInDate}
                     onChange={(e) => setFormData({ ...formData, checkInDate: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Check-Out Date *</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Check-Out Date *</label>
                   <input
                     type="date"
                     required
                     value={formData.checkOutDate}
                     onChange={(e) => setFormData({ ...formData, checkOutDate: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Number of Guests</label>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Number of Guests</label>
                   <input
                     type="number"
                     min="1"
@@ -392,39 +392,39 @@ export default function ReservationsView({ onNavigateToDesk }) {
                     required
                     value={formData.numberOfGuests}
                     onChange={(e) => setFormData({ ...formData, numberOfGuests: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-1">Estimated Stay</label>
-                  <div className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-amber-400 font-semibold">
+                  <label className="text-xs text-slate-600 font-medium block mb-1">Estimated Stay</label>
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-sm text-amber-800 font-semibold">
                     {calculatedNights} Night{calculatedNights > 1 ? 's' : ''} &bull; ₹{calculatedTotal.toLocaleString('en-IN')}
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 font-medium block mb-1">Special Notes / Requests</label>
+                <label className="text-xs text-slate-600 font-medium block mb-1">Special Notes / Requests</label>
                 <input
                   type="text"
                   placeholder="e.g. Late arrival, airport taxi required"
                   value={formData.specialRequests}
                   onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-sm transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm transition shadow-xs"
                 >
                   Confirm Booking
                 </button>
@@ -436,27 +436,27 @@ export default function ReservationsView({ onNavigateToDesk }) {
 
       {/* Cancel Reservation Modal */}
       {cancelModalRes && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl">
-            <div className="flex items-center space-x-2 text-rose-400 mb-2">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-md p-6 shadow-2xl">
+            <div className="flex items-center space-x-2 text-rose-600 mb-2">
               <AlertTriangle className="w-5 h-5" />
-              <h3 className="text-base font-bold text-white">Cancel Reservation</h3>
+              <h3 className="text-base font-bold text-slate-900">Cancel Reservation</h3>
             </div>
-            <p className="text-xs text-slate-400 mb-4">
-              Are you sure you want to cancel booking <strong className="text-white">{cancelModalRes.bookingNumber}</strong> for{' '}
+            <p className="text-xs text-slate-500 mb-4">
+              Are you sure you want to cancel booking <strong className="text-slate-900">{cancelModalRes.bookingNumber}</strong> for{' '}
               {cancelModalRes.guest?.firstName} {cancelModalRes.guest?.lastName}?
             </p>
 
             <form onSubmit={handleCancelSubmit} className="space-y-4">
               <div>
-                <label className="text-xs text-slate-400 font-medium block mb-1">Reason for Cancellation</label>
+                <label className="text-xs text-slate-600 font-medium block mb-1">Reason for Cancellation</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Guest travel plan changed"
                   value={cancellationReason}
                   onChange={(e) => setCancellationReason(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -464,13 +464,13 @@ export default function ReservationsView({ onNavigateToDesk }) {
                 <button
                   type="button"
                   onClick={() => setCancelModalRes(null)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-sm transition"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-semibold text-sm transition"
+                  className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm transition shadow-xs"
                 >
                   Confirm Cancellation
                 </button>
