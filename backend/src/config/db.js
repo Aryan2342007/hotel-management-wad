@@ -10,28 +10,45 @@ if (process.platform === 'win32' && process.env.NODE_ENV !== 'production') {
 
 const mongoose = require('mongoose');
 
+let lastConnectionError = null;
+let retryTimeout = null;
+
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hotel_management_db';
+    let uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hotel_management_db';
+    uri = uri.trim().replace(/^["']|["']$/g, '');
+    
     console.log(`[MongoDB] Connecting to database...`);
     const conn = await mongoose.connect(uri, {
       autoIndex: true, // Build indexes automatically in ADBMS
-      serverSelectionTimeoutMS: 8000,
+      serverSelectionTimeoutMS: 10000,
     });
 
+    lastConnectionError = null;
+    if (retryTimeout) clearTimeout(retryTimeout);
     console.log(`[MongoDB Connected] Host: ${conn.connection.host}, Database: ${conn.connection.name}`);
   } catch (error) {
+    lastConnectionError = error.message;
     console.error(`[MongoDB Connection Error]: ${error.message}`);
-    // Do not call process.exit(1) so Express stays alive and can report health & reconnect
+    // Auto retry after 5 seconds if not connected
+    if (!retryTimeout) {
+      retryTimeout = setTimeout(() => {
+        retryTimeout = null;
+        connectDB();
+      }, 5000);
+    }
   }
 };
+
+const getLastConnectionError = () => lastConnectionError;
 
 mongoose.connection.on('disconnected', () => {
   console.warn('[MongoDB Warning]: Disconnected from database');
 });
 
 mongoose.connection.on('error', (err) => {
+  lastConnectionError = err.message;
   console.error('[MongoDB Error]:', err);
 });
 
-module.exports = connectDB;
+module.exports = { connectDB, getLastConnectionError };

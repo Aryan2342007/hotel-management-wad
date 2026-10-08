@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const { connectDB, getLastConnectionError } = require('./config/db');
 const mongoose = require('mongoose');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
@@ -33,6 +33,7 @@ app.get('/api/health', (req, res) => {
     developer: 'Aryan Patel',
     databaseStatus: dbStates[stateCode] || 'Unknown',
     hasMongoUriEnv: Boolean(process.env.MONGODB_URI),
+    lastDbError: getLastConnectionError(),
     timestamp: new Date().toISOString(),
   });
 });
